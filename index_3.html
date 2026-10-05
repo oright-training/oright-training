@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>全省銷售共學｜顧客拒絕變成交</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green:      #2d6a4f;
+  --green-mid:  #40916c;
+  --green-light:#d8f3dc;
+  --green-pale: #ebf5ef;
+  --gold:       #c9a84c;
+  --gold-pale:  #fdf6e3;
+  --ink:        #1a1a1a;
+  --paper:      #f8f5f0;
+  --white:      #ffffff;
+  --muted:      #888;
+  --border:     #e0dbd3;
+  --line:       #d1e8df;
+}
+
+body {
+  font-family: 'Noto Sans TC', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+/* ── HERO ── */
+.hero {
+  background: var(--green);
+  padding: 52px 28px 44px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -80px; left: -80px;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; right: -40px;
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  background: rgba(201,168,76,0.12);
+}
+.hero-eyebrow {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  position: relative;
+  z-index: 1;
+}
+.hero h1 {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 24px;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.5;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
+}
+.hero-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  font-weight: 300;
+  line-height: 1.7;
+  position: relative;
+  z-index: 1;
+}
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 14px;
+  position: relative;
+  z-index: 1;
+}
+.hero-tag {
+  background: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.92);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+.hero-badge {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: 20px;
+  margin-top: 14px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── TOP CTA ── */
+.top-cta {
+  background: var(--white);
+  border-bottom: 3px solid var(--gold);
+  padding: 20px 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.top-cta-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--gold);
+  text-align: center;
+  text-transform: uppercase;
+}
+.btn-primary-large {
+  display: block;
+  background: var(--green);
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  padding: 18px 48px 18px 24px;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.4;
+  position: relative;
+  transition: background 0.15s, transform 0.1s;
+  animation: pulse 2s infinite;
+}
+.btn-primary-large .sub {
+  font-size: 11px;
+  font-weight: 400;
+  opacity: 0.8;
+  display: block;
+  margin-bottom: 3px;
+  letter-spacing: 0.5px;
+}
+.btn-primary-large::after {
+  content: '▶';
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  opacity: 0.8;
+}
+.btn-primary-large:active { transform: scale(0.97); }
+.btn-secondary-outline {
+  display: block;
+  background: transparent;
+  color: var(--green);
+  text-decoration: none;
+  text-align: center;
+  padding: 13px 40px 13px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 13px;
+  border: 1.5px solid var(--green);
+  position: relative;
+  transition: background 0.15s;
+}
+.btn-secondary-outline::after {
+  content: '↗';
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.6;
+}
+.btn-secondary-outline:active { background: var(--green-light); }
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(45,106,79,0.3); }
+  50%       { box-shadow: 0 0 0 8px rgba(45,106,79,0); }
+}
+
+/* ── CONTAINER ── */
+.container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 28px 20px 60px;
+}
+
+/* ── SECTION LABEL ── */
+.section-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--green);
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── INTRO BOX ── */
+.intro-box {
+  background: var(--green-pale);
+  border-left: 4px solid var(--green);
+  border-radius: 0 12px 12px 0;
+  padding: 16px 18px;
+  margin-bottom: 28px;
+  font-size: 12px;
+  line-height: 1.9;
+  color: #2d4a3e;
+}
+.intro-box strong { color: var(--green); }
+
+/* ── CASE CARDS ── */
+.case-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 28px; }
+.case-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+.case-header {
+  background: var(--green);
+  padding: 14px 18px 13px;
+}
+.case-num {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 3px;
+}
+.case-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 5px;
+}
+.case-type-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.case-tag {
+  background: rgba(255,255,255,0.18);
+  color: rgba(255,255,255,0.92);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: 20px;
+  letter-spacing: 0.3px;
+}
+.case-body { padding: 16px 18px 18px; }
+
+.case-quote {
+  background: var(--green-pale);
+  border-left: 3px solid var(--green-mid);
+  border-radius: 0 8px 8px 0;
+  padding: 11px 14px;
+  font-size: 12px;
+  color: #2d4a3e;
+  line-height: 1.8;
+  margin-bottom: 14px;
+  font-style: italic;
+}
+.case-core {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--green);
+  margin-bottom: 6px;
+}
+.case-desc {
+  font-size: 12px;
+  color: #444;
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+
+/* 步驟列 */
+.mini-steps { display: flex; flex-direction: column; gap: 7px; margin-bottom: 12px; }
+.mini-step {
+  display: flex;
+  gap: 9px;
+  align-items: flex-start;
+}
+.mini-step-num {
+  width: 22px; height: 22px;
+  min-width: 22px;
+  border-radius: 50%;
+  background: var(--green);
+  color: #fff;
+  font-weight: 700;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+}
+.mini-step-text {
+  font-size: 12px;
+  color: #444;
+  line-height: 1.7;
+  flex: 1;
+}
+.mini-step-text strong { color: var(--green); }
+
+/* 話術金句 */
+.script-line {
+  background: var(--green-pale);
+  border-left: 3px solid var(--green-mid);
+  border-radius: 0 8px 8px 0;
+  padding: 9px 13px;
+  font-size: 12px;
+  color: #2d4a3e;
+  line-height: 1.7;
+  margin-bottom: 8px;
+  font-style: italic;
+}
+
+/* 可複製要點 */
+.case-tip {
+  background: var(--gold-pale);
+  border: 1px solid #f0d88a;
+  border-radius: 10px;
+  padding: 11px 14px;
+  font-size: 11.5px;
+  color: #7a5c00;
+  line-height: 1.8;
+  margin-top: 12px;
+}
+.case-tip strong { color: #5a4000; }
+
+/* ── TIP BOX ── */
+.tip-box {
+  background: var(--gold-pale);
+  border: 1px solid #f0d88a;
+  border-radius: 12px;
+  padding: 16px 18px;
+  font-size: 12px;
+  color: #7a5c00;
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+.tip-box strong { color: #5a4000; }
+
+/* ── DIVIDER ── */
+.divider { height: 1px; background: var(--border); margin: 24px 0; }
+
+/* ── FAQ ── */
+.faq { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+.faq-item {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.faq-q {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--green);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+.faq-q::before { content: 'Q'; font-family: 'Noto Serif TC', serif; }
+.faq-a {
+  font-size: 12px;
+  color: #555;
+  line-height: 1.7;
+  padding-left: 18px;
+}
+
+/* ── FOOTER ── */
+.footer {
+  text-align: center;
+  font-size: 11px;
+  color: var(--muted);
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  line-height: 1.8;
+}
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-eyebrow">O'right 歐萊德 · 全省銷售共學</div>
+  <h1>每一個「先看看」<br>都是還沒說完的故事</h1>
+  <div class="hero-sub">來自南紡購物中心・台北巨蛋・台中三井Lalaport<br>三則真實案例，機會藏在顧客說不的那句話裡</div>
+  <div class="hero-tags">
+    <span class="hero-tag">舊客異議轉換型</span>
+    <span class="hero-tag">品牌信任修復型</span>
+    <span class="hero-tag">結帳臨門一腳型</span>
+  </div>
+  <div class="hero-badge">🎧 本週共學｜2026年9月 已上線</div>
+</div>
+
+<!-- ── TOP CTA ── -->
+<div class="top-cta">
+  <div class="top-cta-label">👇 本週共學｜點下方立即開始</div>
+  <a href="https://notebooklm.google.com/notebook/6f6af04a-828d-44be-8d41-048d28d1f09c" target="_blank" class="btn-primary-large">
+    <span class="sub">本週主題｜三則｜顧客拒絕變成交</span>
+    🎧 點此收聽本週音頻
+  </a>
+  <a href="https://docs.google.com/document/d/1AayhUMfpt8l9f_VqJF3fBqvEIN7l6SbA/edit" target="_blank" class="btn-secondary-outline">
+    📄 查看完整話術情境卡
+  </a>
+</div>
+
+<div class="container">
+
+  <!-- ── INTRO ── -->
+  <div class="intro-box">
+    💡 <strong>本週三則案例摘要</strong><br>
+    📍 南紡 9/23｜舊客說咖啡因用起來悶悶的 → 切換四胜肽清爽版本，手上試噴成交<br>
+    📍 台北巨蛋 9/23｜聊出頭皮異味困擾 → 連結全聯換購搭配四胜肽一起使用，蘇丹紅事件後回頭客<br>
+    📍 台中Lala 9/29｜情侶說先看看 → 體驗帶動，結帳前邀請頭皮檢測，香味打動入金卡
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── CASE CARDS ── -->
+  <div class="section-label">本週三則案例</div>
+  <div class="case-list">
+
+    <!-- 案例一 -->
+    <div class="case-card">
+      <div class="case-header">
+        <div class="case-num">CASE 01｜南紡購物中心 9/23</div>
+        <div class="case-title">舊客異議處理型</div>
+        <div class="case-type-row">
+          <span class="case-tag">異議轉換型</span>
+          <span class="case-tag">體驗先行型</span>
+          <span class="case-tag">媽媽帶小孩型</span>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="case-quote">「之前有購買過咖啡因養髮液，覺得使用後頭皮會悶悶的，所以便沒再繼續使用。」</div>
+        <div class="case-core">💡 核心技巧</div>
+        <div class="case-desc">面對「用過覺得不適合」的舊客，不急著解釋，先接住感受，再切換到清爽版本——讓顧客感覺被理解，防線自然打開。</div>
+        <div class="mini-steps">
+          <div class="mini-step">
+            <div class="mini-step-num">1</div>
+            <div class="mini-step-text"><strong>接住異議，不反駁</strong>：「您說的對，每個人頭皮狀況不一樣，有些人確實偏滋潤一點。」</div>
+          </div>
+          <div class="mini-step">
+            <div class="mini-step-num">2</div>
+            <div class="mini-step-text"><strong>精準切換替代方案</strong>：「四胜肽質地比較清爽輕薄，您要不要先試試看？」</div>
+          </div>
+          <div class="mini-step">
+            <div class="mini-step-num">3</div>
+            <div class="mini-step-text">帶小孩不方便做頭皮檢測 → <strong>改在手上試噴</strong>，讓體驗仍然發生。</div>
+          </div>
+        </div>
+        <div class="script-line">💬 「那款相對來說比較滋潤，這款清爽很多，感覺很不一樣——您要不要先在手上試試看吸收度？」</div>
+        <div class="case-tip">🏆 <strong>可複製要點</strong>：現場條件不允許時，找替代的體驗方式。頭皮檢測做不了，手上試噴一樣可以讓顧客有感受——體驗的形式可以調整，但體驗本身不能省略。</div>
+      </div>
+    </div>
+
+    <!-- 案例二 -->
+    <div class="case-card">
+      <div class="case-header">
+        <div class="case-num">CASE 02｜台北巨蛋 9/23</div>
+        <div class="case-title">品牌信任修復型</div>
+        <div class="case-type-row">
+          <span class="case-tag">品牌危機後回頭型</span>
+          <span class="case-tag">聊出需求型</span>
+          <span class="case-tag">忠誠客型</span>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="case-quote">「本身是護理人員，之前得知蘇丹紅事件時氣到把家中所有商品都送人，後面得知是誤會一場後趕快回來購買。這次聊天得知最近有頭皮異味的困擾。」</div>
+        <div class="case-core">💡 核心技巧</div>
+        <div class="case-desc">兩層信任同時發生——品牌信任的修復，以及聊天中發現真實需求。「聊出來的困擾」比「問卷問出來的」更真實，也更容易成交。</div>
+        <div class="mini-steps">
+          <div class="mini-step">
+            <div class="mini-step-num">1</div>
+            <div class="mini-step-text">顧客提到蘇丹紅事件 → <strong>先同理，再說明</strong>：「當時那個消息讓很多人擔心，您會在意是因為在乎健康。感謝您回來。」</div>
+          </div>
+          <div class="mini-step">
+            <div class="mini-step-num">2</div>
+            <div class="mini-step-text">聊天中聽到頭皮異味困擾 → <strong>接住訊號，往前延伸</strong>：「最近出油也比較多嗎？」</div>
+          </div>
+          <div class="mini-step">
+            <div class="mini-step-num">3</div>
+            <div class="mini-step-text"><strong>連結既有換購品加購</strong>：「您手邊有咖啡因了，再加四胜肽白天控油提香，日夜搭配才能真正解決頭皮異味。」</div>
+          </div>
+        </div>
+        <div class="script-line">💬 「您已經有咖啡因了，晚上深度修護有了，缺的是白天輕薄控油那一瓶。四胜肽早上噴，清爽不黏，頭皮味自然改善。」</div>
+        <div class="case-tip">🏆 <strong>可複製要點</strong>：蘇丹紅事件後願意回來的顧客，是對品牌最忠誠的一群。遇到了，先感謝她回來——這比解釋更有力量。連結她手邊已有的商品加購，是最低阻力的成交方式。</div>
+      </div>
+    </div>
+
+    <!-- 案例三 -->
+    <div class="case-card">
+      <div class="case-header">
+        <div class="case-num">CASE 03｜台中三井Lalaport 9/29</div>
+        <div class="case-title">結帳前臨門一腳型</div>
+        <div class="case-type-row">
+          <span class="case-tag">隨機瀏覽型</span>
+          <span class="case-tag">體驗帶動型</span>
+          <span class="case-tag">結帳前加購型</span>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="case-quote">「一組情侶聞了洗髮精後說先看看，再看到髮油試用後帶了髮油＋護髮霜。準備結帳前邀請頭皮檢測介紹四胜肽，覺得味道很香就帶了一組，直接入金卡。」</div>
+        <div class="case-core">💡 核心技巧</div>
+        <div class="case-desc">結帳前是整個服務流程裡顧客防衛心最低的時刻，也是最容易多一件商品被帶走的時機。四胜肽的香氛特性是它最好的銷售工具——讓顧客聞到比說功效更快打中決策點。</div>
+        <div class="mini-steps">
+          <div class="mini-step">
+            <div class="mini-step-num">1</div>
+            <div class="mini-step-text">說「先看看」的顧客 → <strong>不追不擋，讓體驗說話</strong>：「這邊有髮油試用，您可以試試看。」</div>
+          </div>
+          <div class="mini-step">
+            <div class="mini-step-num">2</div>
+            <div class="mini-step-text">顧客準備結帳 → <strong>入金卡邏輯包裝加購</strong>：「再加一組就可以入金卡，以後每次消費都有折扣——要不要先做個頭皮檢測看看？」</div>
+          </div>
+          <div class="mini-step">
+            <div class="mini-step-num">3</div>
+            <div class="mini-step-text">頭皮檢測 → <strong>試噴四胜肽，讓香味打動決策</strong>：顧客說香味很喜歡，當場帶走。</div>
+          </div>
+        </div>
+        <div class="script-line">💬 「您今天的金額差一點就可以入金卡，以後每次消費都有折扣。我幫您做個頭皮檢測，順便幫您試試我們最新款四胜肽。」</div>
+        <div class="case-tip">🏆 <strong>可複製要點</strong>：每位顧客從進店到結帳前，標準動作邀請頭皮檢測＋試噴一款養髮液。平日人少時，留住每一個可能的關係比衝刺每一筆訂單更重要——留 LINE、留印象，都是下次的業績。</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── FAQ ── -->
+  <div class="section-label">常見問題</div>
+  <div class="faq">
+    <div class="faq-item">
+      <div class="faq-q">需要帳號才能使用嗎？</div>
+      <div class="faq-a">不需要。點連結直接進入，手機電腦都可以，不需要登入任何帳號。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">找不到播放鍵怎麼辦？</div>
+      <div class="faq-a">
+        💻 電腦版：進入頁面後右下角會看到音頻，按 ▶ 即可播放。<br>
+        📱 手機版：點上方「工作室」分頁，找到「三則｜顧客拒絕變成交」後按 ▶ 播放。
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">可以在知識庫裡問問題嗎？</div>
+      <div class="faq-a">可以。右側對話框直接輸入，例如「顧客說用了覺得不適合怎麼辦」「結帳前怎麼推養髮液」，知識庫會從案例裡直接給你答案。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">可以查以前的案例嗎？</div>
+      <div class="faq-a">可以。所有案例都在同一個知識庫，右側對話框輸入關鍵字（例如「蘇丹紅」「頭皮異味」「情侶」）就能找到。</div>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    💡 <strong>本週帶走一句話</strong>：<br>
+    機會不在顧客說「好」的那一刻，而在顧客說「先看看」「用了不舒服」「蘇丹紅」的那一刻。那是縫隙，是還沒說完的故事，是你下一句話的起點。
+  </div>
+
+  <div class="footer">
+    O'right 歐萊德｜百貨教育訓練　2026
+  </div>
+
+</div>
+</body>
+</html>
